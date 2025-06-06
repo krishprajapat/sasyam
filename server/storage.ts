@@ -1,15 +1,14 @@
-import { neon, neonConfig } from "@neondatabase/serverless";
-import { drizzle } from "drizzle-orm/neon-http";
+import { drizzle } from "drizzle-orm/node-postgres";
+import { Pool } from "pg";
 import { products, contacts, users, sessions } from "./shared/schema.js";
 import { eq, lt } from "drizzle-orm";
 import type { InsertProduct, InsertContact, User } from "./shared/schema.js";
 
-// Configure Neon
-neonConfig.fetchConnectionCache = true;
-
-// Create a connection pool
-const sql = neon(process.env.DATABASE_URL!);
-const db = drizzle(sql);
+// Create a connection pool for Supabase/Postgres
+const pool = new Pool({
+  connectionString: process.env.DATABASE_URL,
+});
+const db = drizzle(pool);
 
 export const storage = {
   // Products
