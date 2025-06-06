@@ -13,8 +13,9 @@ const app = express();
 
 // CORS configuration
 const allowedOrigins = [
-  process.env.FRONTEND_URL || "http://localhost:5173",
-  "http://localhost:5173",
+  "https://sasyam.vercel.app", // Your frontend Vercel URL
+  "https://sasyam-p58h.vercel.app", // Your backend Vercel URL
+  "http://localhost:5173", // Local development
 ];
 
 app.use(
